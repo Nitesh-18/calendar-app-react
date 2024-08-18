@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { useEventContext } from "../context/EventContext";
+// import { useEventContext } from "../context/EventContext";
+import useEventContext from '../hooks/useEventContext'; // Update import
+
 
 function EventFilter() {
   const { events } = useEventContext();

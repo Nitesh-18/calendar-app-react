@@ -1,24 +1,37 @@
-import React, { createContext, useState, useContext } from "react";
+import React, { createContext, useState, useEffect } from "react";
 
 const EventContext = createContext();
 
-export const EventProvider = ({ children }) => {
+const EventProvider = ({ children }) => {
   const [events, setEvents] = useState([]);
 
+  useEffect(() => {
+    // Load events from localStorage on initial render
+    const savedEvents = JSON.parse(localStorage.getItem("events")) || [];
+    setEvents(savedEvents);
+  }, []);
+
+  useEffect(() => {
+    // Save events to localStorage whenever events change
+    localStorage.setItem("events", JSON.stringify(events));
+  }, [events]);
+
   const addEvent = (event) => {
-    setEvents([...events, event]);
+    setEvents((prevEvents) => [...prevEvents, event]);
   };
 
   const editEvent = (updatedEvent) => {
-    setEvents(
-      events.map((event) =>
+    setEvents((prevEvents) =>
+      prevEvents.map((event) =>
         event.id === updatedEvent.id ? updatedEvent : event
       )
     );
   };
 
   const deleteEvent = (eventId) => {
-    setEvents(events.filter((event) => event.id !== eventId));
+    setEvents((prevEvents) =>
+      prevEvents.filter((event) => event.id !== eventId)
+    );
   };
 
   return (
@@ -28,6 +41,4 @@ export const EventProvider = ({ children }) => {
   );
 };
 
-export const useEventContext = () => {
-  return useContext(EventContext);
-};
+export { EventContext, EventProvider };

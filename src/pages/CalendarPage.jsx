@@ -3,6 +3,7 @@ import Calendar from "../components/Calendar";
 import EventForm from "../components/EventForm";
 import EventFilter from "../components/EventFilter";
 
+
 function CalendarPage() {
   return (
     <div className="container mx-auto p-6">

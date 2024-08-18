@@ -1,6 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { useEventContext } from "../context/EventContext";
+// import { useEventContext } from "../context/EventContext";
+import useEventContext from '../hooks/useEventContext'; // Update import
 import EventDetailsModal from "../components/EventDetailsModal";
 
 function EventDetailsPage() {

@@ -1,36 +1,50 @@
 import React, { useState } from "react";
-import { useEventContext } from "../context/EventContext";
+// import { useEventContext } from "../context/EventContext";
+import useEventContext from '../hooks/useEventContext'; // Update import
 
-function EventForm() {
-  const { addEvent } = useEventContext();
-  const [title, setTitle] = useState("");
-  const [date, setDate] = useState("");
-  const [category, setCategory] = useState("");
+function EventForm({ eventToEdit, onClose }) {
+  const { addEvent, editEvent } = useEventContext();
+  const [title, setTitle] = useState(eventToEdit ? eventToEdit.title : "");
+  const [date, setDate] = useState(eventToEdit ? eventToEdit.date : "");
+  const [category, setCategory] = useState(
+    eventToEdit ? eventToEdit.category : ""
+  );
+  const [description, setDescription] = useState(
+    eventToEdit ? eventToEdit.description : ""
+  );
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!title || !date || !category) return;
 
     const newEvent = {
-      id: Date.now(),
+      id: eventToEdit ? eventToEdit.id : Date.now(),
       title,
       date,
       category,
+      description,
     };
 
-    addEvent(newEvent);
+    if (eventToEdit) {
+      editEvent(newEvent);
+    } else {
+      addEvent(newEvent);
+    }
+
     setTitle("");
     setDate("");
     setCategory("");
+    setDescription("");
+    onClose();
   };
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="mb-6 p-4 bg-white dark:bg-darkBg border border-gray-300 dark:border-gray-700 rounded-lg shadow-sm"
+      className="p-4 bg-white dark:bg-darkBg border border-gray-300 dark:border-gray-700 rounded-lg shadow-sm"
     >
       <h2 className="text-xl font-semibold mb-4 text-primary dark:text-primary">
-        Add New Event
+        {eventToEdit ? "Edit Event" : "Add New Event"}
       </h2>
       <div className="mb-4">
         <label
@@ -45,6 +59,21 @@ function EventForm() {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           className="w-full p-2 border border-gray-300 dark:border-gray-700 rounded bg-gray-100 dark:bg-gray-800"
+        />
+      </div>
+      <div className="mb-4">
+        <label
+          htmlFor="description"
+          className="block text-gray-700 dark:text-gray-300"
+        >
+          Description
+        </label>
+        <textarea
+          id="description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          className="w-full p-2 border border-gray-300 dark:border-gray-700 rounded bg-gray-100 dark:bg-gray-800"
+          rows="3"
         />
       </div>
       <div className="mb-4">
@@ -84,7 +113,7 @@ function EventForm() {
         type="submit"
         className="bg-primary text-white px-4 py-2 rounded hover:bg-blue-700 dark:hover:bg-blue-600"
       >
-        Add Event
+        {eventToEdit ? "Save Changes" : "Add Event"}
       </button>
     </form>
   );
