@@ -43,26 +43,26 @@ function Calendar() {
   const days = Array.from({ length: daysInMonth }, (_, i) => i + 1);
 
   return (
-    <div className="calendar-container p-4">
-      <div className="calendar-header flex justify-between items-center mb-6">
+    <div className="calendar-container p-4 relative bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 shadow-2xl rounded-xl transform rotate-1 hover:rotate-0 transition-transform duration-500">
+      <div className="calendar-header flex justify-between items-center mb-6 text-white">
         <button
           onClick={handlePrevMonth}
-          className="text-lg font-bold text-primary transition-transform transform hover:scale-110"
+          className="text-lg font-bold transition-transform transform hover:scale-125"
         >
           &lt;
         </button>
-        <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-200">
+        <h2 className="text-3xl font-bold">
           {currentDate.toLocaleString("default", { month: "long" })}{" "}
           {currentDate.getFullYear()}
         </h2>
         <button
           onClick={handleNextMonth}
-          className="text-lg font-bold text-primary transition-transform transform hover:scale-110"
+          className="text-lg font-bold transition-transform transform hover:scale-125"
         >
           &gt;
         </button>
       </div>
-      <div className="calendar grid grid-cols-7 gap-3 animate-fade-in">
+      <div className="calendar grid grid-cols-7 gap-4 animate-fade-in">
         {Array(firstDayOfMonth)
           .fill(null)
           .map((_, index) => (
@@ -81,7 +81,7 @@ function Calendar() {
           return (
             <div
               key={day}
-              className="calendar-day p-4 bg-white dark:bg-darkBg border border-gradient shadow-lg rounded-lg hover:shadow-xl transition-shadow duration-300 relative"
+              className="calendar-day p-4 bg-white bg-opacity-80 dark:bg-darkBg border border-gradient-to-br from-purple-300 to-pink-300 shadow-lg rounded-lg transform hover:scale-110 transition-all duration-500 relative"
             >
               <div className="date text-lg font-semibold text-gray-800 dark:text-gray-200 mb-2">
                 {day}
@@ -89,7 +89,7 @@ function Calendar() {
               {dayEvents.map((event) => (
                 <div
                   key={event.id}
-                  className="event p-2 mt-2 bg-blue-100 dark:bg-blue-800 text-xs md:text-sm truncate rounded-md shadow-inner transition-transform transform hover:scale-105"
+                  className="event p-2 mt-2 bg-blue-200 dark:bg-blue-900 text-xs md:text-sm truncate rounded-md shadow-inner transition-transform transform hover:scale-105 hover:bg-blue-300"
                 >
                   <div className="event-title font-medium text-gray-800 dark:text-gray-200">
                     {event.title}
