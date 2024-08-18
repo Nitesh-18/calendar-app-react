@@ -30,7 +30,6 @@ function EventForm({ eventToEdit, onClose }) {
       addEvent(newEvent);
     }
 
-    // Clear form values after adding/editing an event
     setTitle("");
     setDescription("");
     setDate("");
@@ -45,16 +44,13 @@ function EventForm({ eventToEdit, onClose }) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="p-6 bg-white dark:bg-darkBg border border-gray-300 dark:border-gray-700 rounded-lg shadow-lg"
+      className="p-6 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 dark:from-blue-700 dark:via-purple-900 dark:to-pink-900 border border-gray-300 dark:border-gray-700 rounded-lg shadow-lg space-y-6 mb-12"
     >
-      <h2 className="text-2xl font-semibold mb-6 text-primary dark:text-primary">
+      <h2 className="text-2xl font-semibold mb-6 text-white">
         {eventToEdit ? "Edit Event" : "Add New Event"}
       </h2>
       <div className={`mb-5 ${formSizeClass}`}>
-        <label
-          htmlFor="title"
-          className="block text-lg font-medium text-gray-700 dark:text-gray-300"
-        >
+        <label htmlFor="title" className="block text-lg font-medium text-white">
           Title
         </label>
         <input
@@ -62,13 +58,13 @@ function EventForm({ eventToEdit, onClose }) {
           id="title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          className="w-full p-3 border border-gray-300 dark:border-gray-700 rounded bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+          className="w-full p-3 border border-gray-300 dark:border-gray-700 rounded bg-gray-900 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-300"
         />
       </div>
       <div className={`mb-5 ${formSizeClass}`}>
         <label
           htmlFor="description"
-          className="block text-lg font-medium text-gray-700 dark:text-gray-300"
+          className="block text-lg font-medium text-white"
         >
           Description
         </label>
@@ -76,15 +72,12 @@ function EventForm({ eventToEdit, onClose }) {
           id="description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          className="w-full p-3 border border-gray-300 dark:border-gray-700 rounded bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+          className="w-full p-3 border border-gray-300 dark:border-gray-700 rounded bg-gray-900 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-300"
           rows="5"
         />
       </div>
       <div className={`mb-5 ${dateCategorySizeClass}`}>
-        <label
-          htmlFor="date"
-          className="block text-lg font-medium text-gray-700 dark:text-gray-300"
-        >
+        <label htmlFor="date" className="block text-lg font-medium text-white">
           Date
         </label>
         <input
@@ -92,13 +85,13 @@ function EventForm({ eventToEdit, onClose }) {
           id="date"
           value={date}
           onChange={(e) => setDate(e.target.value)}
-          className="w-full p-3 border border-gray-300 dark:border-gray-700 rounded bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+          className="w-full p-3 border border-gray-300 dark:border-gray-700 rounded bg-gray-900 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-300"
         />
       </div>
       <div className={`mb-5 ${dateCategorySizeClass}`}>
         <label
           htmlFor="category"
-          className="block text-lg font-medium text-gray-700 dark:text-gray-300"
+          className="block text-lg font-medium text-white"
         >
           Category
         </label>
@@ -106,7 +99,7 @@ function EventForm({ eventToEdit, onClose }) {
           id="category"
           value={category}
           onChange={(e) => setCategory(e.target.value)}
-          className="w-full p-3 border border-gray-300 dark:border-gray-700 rounded bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+          className="w-full p-3 border border-gray-300 dark:border-gray-700 rounded bg-gray-900 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-300"
         >
           <option value="">Select Category</option>
           <option value="Work">Work</option>
@@ -123,7 +116,7 @@ function EventForm({ eventToEdit, onClose }) {
         </button>
         <button
           type="submit"
-          className="bg-primary text-white px-5 py-2 rounded hover:bg-blue-700 dark:hover:bg-blue-600 transition-all duration-300 ease-in-out"
+          className="bg-blue-600 text-white px-5 py-2 rounded hover:bg-blue-700 dark:hover:bg-blue-600 transition-all duration-300 ease-in-out"
         >
           {eventToEdit ? "Save Changes" : "Add Event"}
         </button>

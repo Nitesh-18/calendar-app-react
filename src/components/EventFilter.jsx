@@ -27,10 +27,10 @@ function EventFilter() {
   };
 
   return (
-    <div className="mb-6 p-4 bg-white dark:bg-darkBg border border-gray-300 dark:border-gray-700 rounded-lg shadow-sm">
+    <div className="mb-6 p-6 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 dark:from-blue-700 dark:via-purple-900 dark:to-pink-900 border border-gray-300 dark:border-gray-700 rounded-lg shadow-lg transition-all duration-300">
       <label
         htmlFor="category"
-        className="block text-gray-700 dark:text-gray-300 mb-2"
+        className="block text-white mb-2 text-lg font-medium"
       >
         Filter by Category
       </label>
@@ -38,14 +38,14 @@ function EventFilter() {
         id="category"
         value={category}
         onChange={(e) => setCategory(e.target.value)}
-        className="w-full p-2 mb-4 border border-gray-300 dark:border-gray-700 rounded bg-gray-100 dark:bg-gray-800"
+        className="w-1/2 p-3 mb-4 border border-gray-300 dark:border-gray-700 rounded bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-300"
       >
         <option value="">All</option>
         <option value="Work">Work</option>
         <option value="Personal">Personal</option>
       </select>
       <div className="mt-4">
-        <h3 className="text-lg font-semibold text-primary dark:text-primary mb-2">
+        <h3 className="text-xl font-semibold text-white mb-4">
           Filtered Events
         </h3>
         <ul className="space-y-4">
@@ -53,19 +53,17 @@ function EventFilter() {
             filteredEvents.map((event) => (
               <li
                 key={event.id}
-                className="flex justify-between items-center p-4 border border-gray-300 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-900 shadow-sm"
+                className="flex justify-between items-center p-4 border border-gray-300 dark:border-gray-700 rounded-lg bg-gradient-to-r from-gray-900 to-gray-800 shadow-sm transition-all duration-300 hover:scale-105 hover:shadow-xl"
               >
                 <div className="flex items-start">
                   <span className="text-2xl mr-3">
                     {categoryIcons[event.category]}
                   </span>
                   <div>
-                    <h4 className="text-xl font-semibold text-gray-800 dark:text-gray-100">
+                    <h4 className="text-lg font-semibold text-white">
                       {event.title}
                     </h4>
-                    <p className="text-gray-600 dark:text-gray-400">
-                      {event.description}
-                    </p>
+                    <p className="text-gray-400">{event.description}</p>
                   </div>
                 </div>
                 <div className="flex items-center space-x-3">
@@ -75,7 +73,7 @@ function EventFilter() {
                       e.preventDefault();
                       handleEdit(event);
                     }}
-                    className="text-blue-500 dark:text-blue-300 hover:underline"
+                    className="text-blue-400 hover:underline transition-colors duration-300"
                   >
                     ✏️ Edit
                   </a>
@@ -85,7 +83,7 @@ function EventFilter() {
                       e.preventDefault();
                       handleDelete(event.id);
                     }}
-                    className="text-red-500 dark:text-red-300 hover:underline"
+                    className="text-red-400 hover:underline transition-colors duration-300"
                   >
                     🗑️ Delete
                   </a>
@@ -93,9 +91,7 @@ function EventFilter() {
               </li>
             ))
           ) : (
-            <li className="text-gray-500 dark:text-gray-400">
-              No events found
-            </li>
+            <li className="text-gray-400">No events found</li>
           )}
         </ul>
       </div>

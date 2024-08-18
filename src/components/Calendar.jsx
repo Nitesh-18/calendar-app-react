@@ -81,7 +81,7 @@ function Calendar() {
           return (
             <div
               key={day}
-              className="calendar-day p-4 bg-white bg-opacity-80 dark:bg-darkBg border border-gradient-to-br from-purple-300 to-pink-300 shadow-lg rounded-lg transform hover:scale-110 transition-all duration-500 relative"
+              className="calendar-day p-4 bg-white bg-opacity-80 dark:bg-darkBg border border-gradient-to-br from-purple-300 to-pink-300  shadow-lg rounded-lg transform hover:scale-110 transition-all duration-500 relative"
             >
               <div className="date text-lg font-semibold text-gray-800 dark:text-gray-200 mb-2">
                 {day}
