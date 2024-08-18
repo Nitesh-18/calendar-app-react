@@ -39,22 +39,21 @@ function EventForm({ eventToEdit, onClose }) {
     onClose();
   };
 
-  // Determine form size based on whether it's editing or adding
-  const formSizeClass = eventToEdit ? "w-3/3" : "w-1/3";
-  const dateCategorySizeClass = eventToEdit ? "w-2/3" : "w-1/5";
+  const formSizeClass = eventToEdit ? "w-full" : "w-full lg:w-1/2";
+  const dateCategorySizeClass = eventToEdit ? "w-full" : "w-full lg:w-1/3";
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="p-4 bg-white dark:bg-darkBg border border-gray-300 dark:border-gray-700 rounded-lg shadow-sm"
+      className="p-6 bg-white dark:bg-darkBg border border-gray-300 dark:border-gray-700 rounded-lg shadow-lg"
     >
-      <h2 className="text-xl font-semibold mb-4 text-primary dark:text-primary">
+      <h2 className="text-2xl font-semibold mb-6 text-primary dark:text-primary">
         {eventToEdit ? "Edit Event" : "Add New Event"}
       </h2>
-      <div className={`mb-4 ${formSizeClass}`}>
+      <div className={`mb-5 ${formSizeClass}`}>
         <label
           htmlFor="title"
-          className="block text-gray-700 dark:text-gray-300"
+          className="block text-lg font-medium text-gray-700 dark:text-gray-300"
         >
           Title
         </label>
@@ -63,13 +62,13 @@ function EventForm({ eventToEdit, onClose }) {
           id="title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          className="w-full p-3 border border-gray-300 dark:border-gray-700 rounded bg-gray-100 dark:bg-gray-800"
+          className="w-full p-3 border border-gray-300 dark:border-gray-700 rounded bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100"
         />
       </div>
-      <div className={`mb-4 ${formSizeClass}`}>
+      <div className={`mb-5 ${formSizeClass}`}>
         <label
           htmlFor="description"
-          className="block text-gray-700 dark:text-gray-300"
+          className="block text-lg font-medium text-gray-700 dark:text-gray-300"
         >
           Description
         </label>
@@ -77,14 +76,14 @@ function EventForm({ eventToEdit, onClose }) {
           id="description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          className="w-full p-3 border border-gray-300 dark:border-gray-700 rounded bg-gray-100 dark:bg-gray-800"
-          rows="4"
+          className="w-full p-3 border border-gray-300 dark:border-gray-700 rounded bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+          rows="5"
         />
       </div>
-      <div className={`mb-4 ${dateCategorySizeClass}`}>
+      <div className={`mb-5 ${dateCategorySizeClass}`}>
         <label
           htmlFor="date"
-          className="block text-gray-700 dark:text-gray-300"
+          className="block text-lg font-medium text-gray-700 dark:text-gray-300"
         >
           Date
         </label>
@@ -93,13 +92,13 @@ function EventForm({ eventToEdit, onClose }) {
           id="date"
           value={date}
           onChange={(e) => setDate(e.target.value)}
-          className="w-full p-3 border border-gray-300 dark:border-gray-700 rounded bg-gray-100 dark:bg-gray-800"
+          className="w-full p-3 border border-gray-300 dark:border-gray-700 rounded bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100"
         />
       </div>
-      <div className={`mb-4 ${dateCategorySizeClass}`}>
+      <div className={`mb-5 ${dateCategorySizeClass}`}>
         <label
           htmlFor="category"
-          className="block text-gray-700 dark:text-gray-300"
+          className="block text-lg font-medium text-gray-700 dark:text-gray-300"
         >
           Category
         </label>
@@ -107,24 +106,24 @@ function EventForm({ eventToEdit, onClose }) {
           id="category"
           value={category}
           onChange={(e) => setCategory(e.target.value)}
-          className="w-full p-3 border border-gray-300 dark:border-gray-700 rounded bg-gray-100 dark:bg-gray-800"
+          className="w-full p-3 border border-gray-300 dark:border-gray-700 rounded bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100"
         >
           <option value="">Select Category</option>
           <option value="Work">Work</option>
           <option value="Personal">Personal</option>
         </select>
       </div>
-      <div className="flex justify-end">
+      <div className="flex justify-end space-x-4">
         <button
           type="button"
           onClick={onClose}
-          className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 dark:hover:bg-gray-700 mr-2"
+          className="bg-gray-500 text-white px-5 py-2 rounded hover:bg-gray-600 dark:hover:bg-gray-700 transition-all duration-300 ease-in-out"
         >
           Cancel
         </button>
         <button
           type="submit"
-          className="bg-primary text-white px-4 py-2 rounded hover:bg-blue-700 dark:hover:bg-blue-600"
+          className="bg-primary text-white px-5 py-2 rounded hover:bg-blue-700 dark:hover:bg-blue-600 transition-all duration-300 ease-in-out"
         >
           {eventToEdit ? "Save Changes" : "Add Event"}
         </button>
