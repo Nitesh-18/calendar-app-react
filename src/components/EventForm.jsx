@@ -30,6 +30,12 @@ function EventForm({ eventToEdit, onClose }) {
       addEvent(newEvent);
     }
 
+    // Clear form values after adding/editing an event
+    setTitle("");
+    setDescription("");
+    setDate("");
+    setCategory("");
+
     onClose();
   };
 
@@ -41,7 +47,7 @@ function EventForm({ eventToEdit, onClose }) {
       <h2 className="text-xl font-semibold mb-4 text-primary dark:text-primary">
         {eventToEdit ? "Edit Event" : "Add New Event"}
       </h2>
-      <div className="mb-4">
+      <div className="mb-4  w-1/3">
         <label
           htmlFor="title"
           className="block text-gray-700 dark:text-gray-300"
@@ -56,7 +62,7 @@ function EventForm({ eventToEdit, onClose }) {
           className="w-full p-2 border border-gray-300 dark:border-gray-700 rounded bg-gray-100 dark:bg-gray-800"
         />
       </div>
-      <div className="mb-4">
+      <div className="mb-4 w-1/3">
         <label
           htmlFor="description"
           className="block text-gray-700 dark:text-gray-300"
@@ -71,7 +77,7 @@ function EventForm({ eventToEdit, onClose }) {
           rows="3"
         />
       </div>
-      <div className="mb-4">
+      <div className="mb-4 w-1/5">
         <label
           htmlFor="date"
           className="block text-gray-700 dark:text-gray-300"
@@ -86,7 +92,7 @@ function EventForm({ eventToEdit, onClose }) {
           className="w-full p-2 border border-gray-300 dark:border-gray-700 rounded bg-gray-100 dark:bg-gray-800"
         />
       </div>
-      <div className="mb-4">
+      <div className="mb-4 w-1/5">
         <label
           htmlFor="category"
           className="block text-gray-700 dark:text-gray-300"

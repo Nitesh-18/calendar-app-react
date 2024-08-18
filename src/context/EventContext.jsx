@@ -3,13 +3,11 @@ import React, { createContext, useState, useEffect } from "react";
 const EventContext = createContext();
 
 const EventProvider = ({ children }) => {
-  const [events, setEvents] = useState([]);
-
-  useEffect(() => {
+  const [events, setEvents] = useState(() => {
     // Load events from localStorage on initial render
-    const savedEvents = JSON.parse(localStorage.getItem("events")) || [];
-    setEvents(savedEvents);
-  }, []);
+    const savedEvents = JSON.parse(localStorage.getItem("events"));
+    return savedEvents || [];
+  });
 
   useEffect(() => {
     // Save events to localStorage whenever events change
