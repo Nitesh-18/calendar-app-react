@@ -41,7 +41,7 @@ function EventForm({ eventToEdit, onClose }) {
 
   // Determine form size based on whether it's editing or adding
   const formSizeClass = eventToEdit ? "w-3/3" : "w-1/3";
-  const dateCategorySizeClass = eventToEdit ? "w-1/2" : "w-1/5";
+  const dateCategorySizeClass = eventToEdit ? "w-2/3" : "w-1/5";
 
   return (
     <form
@@ -63,7 +63,7 @@ function EventForm({ eventToEdit, onClose }) {
           id="title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          className="w-full p-2 border border-gray-300 dark:border-gray-700 rounded bg-gray-100 dark:bg-gray-800"
+          className="w-full p-3 border border-gray-300 dark:border-gray-700 rounded bg-gray-100 dark:bg-gray-800"
         />
       </div>
       <div className={`mb-4 ${formSizeClass}`}>
@@ -77,8 +77,8 @@ function EventForm({ eventToEdit, onClose }) {
           id="description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          className="w-full p-2 border border-gray-300 dark:border-gray-700 rounded bg-gray-100 dark:bg-gray-800"
-          rows="3"
+          className="w-full p-3 border border-gray-300 dark:border-gray-700 rounded bg-gray-100 dark:bg-gray-800"
+          rows="4"
         />
       </div>
       <div className={`mb-4 ${dateCategorySizeClass}`}>
@@ -93,7 +93,7 @@ function EventForm({ eventToEdit, onClose }) {
           id="date"
           value={date}
           onChange={(e) => setDate(e.target.value)}
-          className="w-full p-2 border border-gray-300 dark:border-gray-700 rounded bg-gray-100 dark:bg-gray-800"
+          className="w-full p-3 border border-gray-300 dark:border-gray-700 rounded bg-gray-100 dark:bg-gray-800"
         />
       </div>
       <div className={`mb-4 ${dateCategorySizeClass}`}>
@@ -107,7 +107,7 @@ function EventForm({ eventToEdit, onClose }) {
           id="category"
           value={category}
           onChange={(e) => setCategory(e.target.value)}
-          className="w-full p-2 border border-gray-300 dark:border-gray-700 rounded bg-gray-100 dark:bg-gray-800"
+          className="w-full p-3 border border-gray-300 dark:border-gray-700 rounded bg-gray-100 dark:bg-gray-800"
         >
           <option value="">Select Category</option>
           <option value="Work">Work</option>

@@ -37,6 +37,10 @@ function Calendar() {
     }
   };
 
+  const handleEdit = (event) => {
+    setEditEvent(event);
+  };
+
   const days = Array.from({ length: daysInMonth }, (_, i) => i + 1);
 
   return (
@@ -73,24 +77,31 @@ function Calendar() {
               <div className="date text-lg font-semibold">{day}</div>
               {dayEvents.map((event) => (
                 <div key={event.id} className="event mt-2">
-                  <Link
-                    to={`/event/${event.id}`}
-                    className="text-blue-500 dark:text-blue-300 hover:underline"
-                  >
+                  <div className="event-title text-xs md:text-sm truncate">
                     {event.title}
-                  </Link>
-                  <button
-                    onClick={() => setEditEvent(event)}
-                    className="absolute top-2 right-12 text-blue-500 dark:text-blue-300 hover:underline"
-                  >
-                    ✏️
-                  </button>
-                  <button
-                    onClick={() => handleDelete(event.id)}
-                    className="absolute top-2 right-2 text-red-500 dark:text-red-300 hover:underline"
-                  >
-                    🗑️
-                  </button>
+                  </div>
+                  <div className="event-icons flex justify-between">
+                    <a
+                      href="#"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleEdit(event);
+                      }}
+                      className="text-blue-500"
+                    >
+                      ✏️
+                    </a>
+                    <a
+                      href="#"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleDelete(event.id);
+                      }}
+                      className="text-red-500"
+                    >
+                      🗑️
+                    </a>
+                  </div>
                 </div>
               ))}
             </div>
