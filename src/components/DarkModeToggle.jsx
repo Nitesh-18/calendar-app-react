@@ -13,7 +13,7 @@ function DarkModeToggle() {
   return (
     <button
       onClick={() => setDarkMode(!darkMode)}
-      className="fixed top-4 right-4 p-2 bg-primary text-white rounded-full shadow-md focus:outline-none"
+      className="fixed top-4 right-4 p-2 animate-bounce bg-primary text-white rounded-full shadow-md focus:outline-none"
     >
       {darkMode ? "🌙" : "☀️"}
     </button>
