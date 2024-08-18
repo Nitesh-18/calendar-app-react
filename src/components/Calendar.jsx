@@ -1,86 +1,102 @@
-import React, {useState} from "react";
-// import { useEventContext } from "../context/EventContext";
+import React, { useState } from "react";
+import useEventContext from "../hooks/useEventContext";
 import { Link } from "react-router-dom";
-import dayjs from "dayjs";
-import useEventContext from '../hooks/useEventContext'; // Update import
+import EventForm from "./EventForm";
 
 function Calendar() {
-  //   const { events } = useEventContext();
-  const currentMonth = dayjs().month();
-  const daysInMonth = dayjs().daysInMonth();
-  const startOfMonth = dayjs().startOf("month").day();
   const { events, deleteEvent } = useEventContext();
   const [editEvent, setEditEvent] = useState(null);
+  const [currentDate, setCurrentDate] = useState(new Date());
 
-  const renderDays = () => {
-    const days = [];
-    for (let i = 0; i < startOfMonth; i++) {
-      days.push(<div key={`empty-${i}`} className="empty-day"></div>);
-    }
-    for (let day = 1; day <= daysInMonth; day++) {
-      const dayEvents = events.filter(
-        (event) =>
-          dayjs(event.date).date() === day &&
-          dayjs(event.date).month() === currentMonth
-      );
-      days.push(
-        <div
-          key={day}
-          className="calendar-day p-4 bg-white dark:bg-darkBg border border-gray-300 dark:border-gray-700 rounded-lg shadow-sm"
-        >
-          <div className="date text-lg font-semibold">{day}</div>
-          {dayEvents.map((event) => (
-            <Link
-              key={event.id}
-              to={`/event/${event.id}`}
-              className="event block mt-2 text-blue-500 dark:text-blue-300 hover:underline"
-            >
-              {event.title}
-            </Link>
-          ))}
-        </div>
-      );
-    }
-    return days;
+  const daysInMonth = new Date(
+    currentDate.getFullYear(),
+    currentDate.getMonth() + 1,
+    0
+  ).getDate();
+  const firstDayOfMonth = new Date(
+    currentDate.getFullYear(),
+    currentDate.getMonth(),
+    1
+  ).getDay();
+
+  const handleNextMonth = () => {
+    setCurrentDate(
+      new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1)
+    );
+  };
+
+  const handlePrevMonth = () => {
+    setCurrentDate(
+      new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1)
+    );
   };
 
   const handleDelete = (eventId) => {
-    deleteEvent(eventId);
+    if (window.confirm("Are you sure to delete the event?")) {
+      deleteEvent(eventId);
+    }
   };
 
+  const days = Array.from({ length: daysInMonth }, (_, i) => i + 1);
+
   return (
-    <div className="calendar grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-      {renderDays()}
-      {events.map((event) => (
-        <div
-          key={event.id}
-          className="calendar-day p-4 bg-white dark:bg-darkBg border border-gray-300 dark:border-gray-700 rounded-lg shadow-sm relative"
-        >
-          <div className="date text-lg font-semibold">
-            {dayjs(event.date).date()}
-          </div>
-          <div className="event mt-2">
-            <Link
-              to={`/event/${event.id}`}
-              className="text-blue-500 dark:text-blue-300 hover:underline"
+    <div className="calendar-container">
+      <div className="calendar-header flex justify-between items-center mb-4">
+        <button onClick={handlePrevMonth}>&lt;</button>
+        <h2>
+          {currentDate.toLocaleString("default", { month: "long" })}{" "}
+          {currentDate.getFullYear()}
+        </h2>
+        <button onClick={handleNextMonth}>&gt;</button>
+      </div>
+      <div className="calendar grid grid-cols-7 gap-2">
+        {Array(firstDayOfMonth)
+          .fill(null)
+          .map((_, index) => (
+            <div key={index}></div>
+          ))}
+        {days.map((day) => {
+          const dayEvents = events.filter((event) => {
+            const eventDate = new Date(event.date);
+            return (
+              eventDate.getDate() === day &&
+              eventDate.getMonth() === currentDate.getMonth() &&
+              eventDate.getFullYear() === currentDate.getFullYear()
+            );
+          });
+
+          return (
+            <div
+              key={day}
+              className="calendar-day p-4 bg-white dark:bg-darkBg border border-gray-300 dark:border-gray-700 rounded-lg shadow-sm relative"
             >
-              {event.title}
-            </Link>
-            <button
-              onClick={() => setEditEvent(event)}
-              className="absolute top-2 right-12 text-blue-500 dark:text-blue-300 hover:underline"
-            >
-              ✏️
-            </button>
-            <button
-              onClick={() => handleDelete(event.id)}
-              className="absolute top-2 right-2 text-red-500 dark:text-red-300 hover:underline"
-            >
-              🗑️
-            </button>
-          </div>
-        </div>
-      ))}
+              <div className="date text-lg font-semibold">{day}</div>
+              {dayEvents.map((event) => (
+                <div key={event.id} className="event mt-2">
+                  <Link
+                    to={`/event/${event.id}`}
+                    className="text-blue-500 dark:text-blue-300 hover:underline"
+                  >
+                    {event.title}
+                  </Link>
+                  <button
+                    onClick={() => setEditEvent(event)}
+                    className="absolute top-2 right-12 text-blue-500 dark:text-blue-300 hover:underline"
+                  >
+                    ✏️
+                  </button>
+                  <button
+                    onClick={() => handleDelete(event.id)}
+                    className="absolute top-2 right-2 text-red-500 dark:text-red-300 hover:underline"
+                  >
+                    🗑️
+                  </button>
+                </div>
+              ))}
+            </div>
+          );
+        })}
+      </div>
       {editEvent && (
         <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">
           <EventForm

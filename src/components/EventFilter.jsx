@@ -1,15 +1,24 @@
 import React, { useState } from "react";
-// import { useEventContext } from "../context/EventContext";
-import useEventContext from '../hooks/useEventContext'; // Update import
-
+import useEventContext from "../hooks/useEventContext";
 
 function EventFilter() {
-  const { events } = useEventContext();
+  const { events, deleteEvent, editEvent } = useEventContext();
   const [category, setCategory] = useState("");
+  const [editEventState, setEditEventState] = useState(null);
 
   const filteredEvents = category
     ? events.filter((event) => event.category === category)
     : events;
+
+  const handleEdit = (event) => {
+    setEditEventState(event);
+  };
+
+  const handleDelete = (eventId) => {
+    if (window.confirm("Are you sure you want to delete this event?")) {
+      deleteEvent(eventId);
+    }
+  };
 
   return (
     <div className="mb-6 p-4 bg-white dark:bg-darkBg border border-gray-300 dark:border-gray-700 rounded-lg shadow-sm">
@@ -38,7 +47,7 @@ function EventFilter() {
             filteredEvents.map((event) => (
               <li
                 key={event.id}
-                className="p-2 border-b border-gray-300 dark:border-gray-700"
+                className="flex justify-between items-center p-2 border-b border-gray-300 dark:border-gray-700"
               >
                 <a
                   href={`/event/${event.id}`}
@@ -46,6 +55,20 @@ function EventFilter() {
                 >
                   {event.title}
                 </a>
+                <div className="flex items-center">
+                  <button
+                    onClick={() => handleEdit(event)}
+                    className="mr-2 text-blue-500 dark:text-blue-300 hover:underline"
+                  >
+                    ✏️ Edit
+                  </button>
+                  <button
+                    onClick={() => handleDelete(event.id)}
+                    className="text-red-500 dark:text-red-300 hover:underline"
+                  >
+                    🗑️ Delete
+                  </button>
+                </div>
               </li>
             ))
           ) : (
@@ -55,6 +78,14 @@ function EventFilter() {
           )}
         </ul>
       </div>
+      {editEventState && (
+        <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">
+          <EventForm
+            eventToEdit={editEventState}
+            onClose={() => setEditEventState(null)}
+          />
+        </div>
+      )}
     </div>
   );
 }

@@ -1,6 +1,5 @@
-import React, { useState } from "react";
-// import { useEventContext } from "../context/EventContext";
-import useEventContext from '../hooks/useEventContext'; // Update import
+import React, { useState, useEffect } from "react";
+import useEventContext from "../hooks/useEventContext";
 
 function EventForm({ eventToEdit, onClose }) {
   const { addEvent, editEvent } = useEventContext();
@@ -31,10 +30,6 @@ function EventForm({ eventToEdit, onClose }) {
       addEvent(newEvent);
     }
 
-    setTitle("");
-    setDate("");
-    setCategory("");
-    setDescription("");
     onClose();
   };
 
@@ -109,12 +104,21 @@ function EventForm({ eventToEdit, onClose }) {
           <option value="Personal">Personal</option>
         </select>
       </div>
-      <button
-        type="submit"
-        className="bg-primary text-white px-4 py-2 rounded hover:bg-blue-700 dark:hover:bg-blue-600"
-      >
-        {eventToEdit ? "Save Changes" : "Add Event"}
-      </button>
+      <div className="flex justify-end">
+        <button
+          type="button"
+          onClick={onClose}
+          className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 dark:hover:bg-gray-700 mr-2"
+        >
+          Cancel
+        </button>
+        <button
+          type="submit"
+          className="bg-primary text-white px-4 py-2 rounded hover:bg-blue-700 dark:hover:bg-blue-600"
+        >
+          {eventToEdit ? "Save Changes" : "Add Event"}
+        </button>
+      </div>
     </form>
   );
 }
