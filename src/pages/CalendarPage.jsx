@@ -11,8 +11,8 @@ function CalendarPage() {
         Calendar
       </h1>
       <EventFilter />
-      <Calendar />
       <EventForm />
+      <Calendar />
     </div>
   );
 }

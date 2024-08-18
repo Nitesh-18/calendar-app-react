@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import useEventContext from "../hooks/useEventContext";
 
 function EventForm({ eventToEdit, onClose }) {
@@ -39,6 +39,10 @@ function EventForm({ eventToEdit, onClose }) {
     onClose();
   };
 
+  // Determine form size based on whether it's editing or adding
+  const formSizeClass = eventToEdit ? "w-3/3" : "w-1/3";
+  const dateCategorySizeClass = eventToEdit ? "w-1/2" : "w-1/5";
+
   return (
     <form
       onSubmit={handleSubmit}
@@ -47,7 +51,7 @@ function EventForm({ eventToEdit, onClose }) {
       <h2 className="text-xl font-semibold mb-4 text-primary dark:text-primary">
         {eventToEdit ? "Edit Event" : "Add New Event"}
       </h2>
-      <div className="mb-4  w-1/3">
+      <div className={`mb-4 ${formSizeClass}`}>
         <label
           htmlFor="title"
           className="block text-gray-700 dark:text-gray-300"
@@ -62,7 +66,7 @@ function EventForm({ eventToEdit, onClose }) {
           className="w-full p-2 border border-gray-300 dark:border-gray-700 rounded bg-gray-100 dark:bg-gray-800"
         />
       </div>
-      <div className="mb-4 w-1/3">
+      <div className={`mb-4 ${formSizeClass}`}>
         <label
           htmlFor="description"
           className="block text-gray-700 dark:text-gray-300"
@@ -77,7 +81,7 @@ function EventForm({ eventToEdit, onClose }) {
           rows="3"
         />
       </div>
-      <div className="mb-4 w-1/5">
+      <div className={`mb-4 ${dateCategorySizeClass}`}>
         <label
           htmlFor="date"
           className="block text-gray-700 dark:text-gray-300"
@@ -92,7 +96,7 @@ function EventForm({ eventToEdit, onClose }) {
           className="w-full p-2 border border-gray-300 dark:border-gray-700 rounded bg-gray-100 dark:bg-gray-800"
         />
       </div>
-      <div className="mb-4 w-1/5">
+      <div className={`mb-4 ${dateCategorySizeClass}`}>
         <label
           htmlFor="category"
           className="block text-gray-700 dark:text-gray-300"

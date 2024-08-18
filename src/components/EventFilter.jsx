@@ -1,8 +1,14 @@
 import React, { useState } from "react";
 import useEventContext from "../hooks/useEventContext";
+import EventForm from "./EventForm"; // Assuming EventForm is correctly imported
+
+const categoryIcons = {
+  Work: "💼",
+  Personal: "🏠",
+};
 
 function EventFilter() {
-  const { events, deleteEvent, editEvent } = useEventContext();
+  const { events, deleteEvent } = useEventContext();
   const [category, setCategory] = useState("");
   const [editEventState, setEditEventState] = useState(null);
 
@@ -32,42 +38,57 @@ function EventFilter() {
         id="category"
         value={category}
         onChange={(e) => setCategory(e.target.value)}
-        className="w-full p-2 border border-gray-300 dark:border-gray-700 rounded bg-gray-100 dark:bg-gray-800"
+        className="w-full p-2 mb-4 border border-gray-300 dark:border-gray-700 rounded bg-gray-100 dark:bg-gray-800"
       >
         <option value="">All</option>
         <option value="Work">Work</option>
         <option value="Personal">Personal</option>
       </select>
       <div className="mt-4">
-        <h3 className="text-lg font-semibold text-primary dark:text-primary">
+        <h3 className="text-lg font-semibold text-primary dark:text-primary mb-2">
           Filtered Events
         </h3>
-        <ul className="mt-2">
+        <ul className="space-y-4">
           {filteredEvents.length > 0 ? (
             filteredEvents.map((event) => (
               <li
                 key={event.id}
-                className="flex justify-between items-center p-2 border-b border-gray-300 dark:border-gray-700"
+                className="flex justify-between items-center p-4 border border-gray-300 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-900 shadow-sm"
               >
-                <a
-                  href={`/event/${event.id}`}
-                  className="text-blue-500 dark:text-blue-300 hover:underline"
-                >
-                  {event.title}
-                </a>
-                <div className="flex items-center">
-                  <button
-                    onClick={() => handleEdit(event)}
-                    className="mr-2 text-blue-500 dark:text-blue-300 hover:underline"
+                <div className="flex items-start">
+                  <span className="text-2xl mr-3">
+                    {categoryIcons[event.category]}
+                  </span>
+                  <div>
+                    <h4 className="text-xl font-semibold text-gray-800 dark:text-gray-100">
+                      {event.title}
+                    </h4>
+                    <p className="text-gray-600 dark:text-gray-400">
+                      {event.description}
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <a
+                    href=""
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleEdit(event);
+                    }}
+                    className="text-blue-500 dark:text-blue-300 hover:underline"
                   >
                     ✏️ Edit
-                  </button>
-                  <button
-                    onClick={() => handleDelete(event.id)}
+                  </a>
+                  <a
+                    href="#"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleDelete(event.id);
+                    }}
                     className="text-red-500 dark:text-red-300 hover:underline"
                   >
                     🗑️ Delete
-                  </button>
+                  </a>
                 </div>
               </li>
             ))
