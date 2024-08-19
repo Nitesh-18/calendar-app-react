@@ -38,7 +38,7 @@ function EventFilter() {
         id="category"
         value={category}
         onChange={(e) => setCategory(e.target.value)}
-        className="w-1/2 p-3 mb-4 border border-gray-300 dark:border-gray-700 rounded bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-300"
+        className="w-1/3   p-3 mb-4 border border-gray-300 dark:border-gray-700 rounded bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-300"
       >
         <option value="">All</option>
         <option value="Work">Work</option>
