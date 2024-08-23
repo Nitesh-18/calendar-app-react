@@ -85,9 +85,10 @@ function EventForm({ eventToEdit, onClose }) {
           id="date"
           value={date}
           onChange={(e) => setDate(e.target.value)}
-          className="w-full p-3 border border-gray-300 dark:border-gray-700 rounded bg-gray-900 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-300"
+          className="w-full p-3 border border-gray-300 dark:border-gray-700 rounded bg-gray-900 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-300 appearance-none"
         />
       </div>
+
       <div className={`mb-5 ${dateCategorySizeClass}`}>
         <label
           htmlFor="category"
